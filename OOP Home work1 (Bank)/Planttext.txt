@@ -1,0 +1,38 @@
+@startuml
+
+skin rose
+
+title Classes - Class Diagram
+
+class BankAccount {
+    -owner : string
+    -balance : float
+    +BankAccount(owner: string, balance: float)
+    +get_balance() : float
+    +transfer(to_account: BankAccount, amount: float)
+}
+
+class BankTransaction {
+    -sender : BankAccount
+    -recipient : BankAccount
+    -amount : float
+    +BankTransaction(sender: BankAccount, recipient: BankAccount, amount: float)
+    +execute() : void
+}
+
+class Bank {
+    -accounts : list<BankAccount>
+    +Bank()
+    +add_account(owner: string, balance: float) : BankAccount
+    +get_account_balance(owner: string) : float
+    +get_all_accounts() : list<BankAccount>
+    +transfer_funds(from_owner: string, to_owner: string, amount: float) : void
+}
+
+BankTransaction --> BankAccount
+BankTransaction --> BankAccount
+Bank --> BankAccount
+Bank --> BankTransaction
+
+
+@enduml
